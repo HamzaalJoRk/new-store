@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use  App\Http\Controllers\Front\AuthController;
-use  App\Http\Controllers\Front\HomeController;
-use  App\Http\Controllers\Front\GameController;
-use  App\Http\Controllers\Front\AgentController;
-use  App\Http\Controllers\Front\TransactionController;
-use  App\Http\Controllers\Front\OrderController as FrontOrderController;
+use App\Http\Controllers\Front\AuthController;
+use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\GameController;
+use App\Http\Controllers\Front\AgentController;
+use App\Http\Controllers\Front\TransactionController;
+use App\Http\Controllers\Front\OrderController as FrontOrderController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AgentController as AdminAgentController;
@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProviderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,17 +47,10 @@ Route::group(['prefix' => 'dashboard', 'as'=>'ad.'], function () {
 });
 
 
-
-
-
-
 Route::group(['prefix' => LaravelLocalization::setLocale().'/ad', 'as'=>'ad.', 'middleware' => ['auth.admin:admin',  'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function () {
     Route::get('/dashboard', function (){
         return view('admin.index');
     })->name('index');
-
-
-
 
     Route::resource('games',CurdGamesController::class);
     Route::get('games/packages/{id}',[CurdGamesController::class,'packages'])->name('games.packages');
@@ -64,13 +58,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale().'/ad', 'as'=>'ad.', '
     Route::delete('games/packages/delete/{id}',[CurdGamesController::class,'packagesDestroy'])->name('games.packages.delete');
     Route::post('permissions',[CurdAdminController::class,'AddPermissions'])->name('permissions.add');
 
-
     //admins
     Route::resource('admins',AdminController::class);
     //users
     Route::resource('users',UserController::class);
     //agents
     Route::resource('agents',AdminAgentController::class);
+    //providers
+    Route::resource('providers',ProviderController::class);
     //banks
     Route::resource('banks',BankController::class);
     //transactions
@@ -108,8 +103,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale().'/ad', 'as'=>'ad.', '
     Route::resource('cities',CityController::class);
 
 });
-
-
 
 
 Route::group(
@@ -151,11 +144,9 @@ Route::group(
         Route::get('/transactions/{type?}', [TransactionController::class, 'index'])->name('front.transactions')->middleware('auth');
         Route::get('/orders/{type?}', [FrontOrderController::class, 'index'])->name('front.orders')->middleware('auth');
 
-
+        /********** Providers *************/
+        
 });
-
-
-
 
 Route::get('/old', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
 //Update User Details

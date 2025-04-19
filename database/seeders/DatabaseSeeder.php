@@ -14,10 +14,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // PermissionSeeder::class,
             LaratrustSeeder::class,
             AdminSeeder::class,
             CurrencySeeder::class,
+            CountryCitySeeder::class, // إضافة seeder الدول والمدن
+            LevelSeeder::class, // إضافة seeder المستويات
         ]);
     }
 }

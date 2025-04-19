@@ -1,0 +1,69 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ProviderRequest;
+use App\Models\Provider;
+use RealRashid\SweetAlert\Facades\Alert;
+
+class ProviderController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('permission:read_providers')->only(['index']);
+        $this->middleware('permission:create_providers')->only(['create', 'store']);
+        $this->middleware('permission:update_providers')->only(['edit', 'update']);
+        $this->middleware('permission:delete_providers')->only(['delete', 'destroy']);
+    }
+
+    public function index()
+    {
+        $providers = Provider::latest()->paginate(10);
+        return view('admin.providers.index', compact('providers'));
+    }
+
+    public function create()
+    {
+        return view('admin.providers.create');
+    }
+
+    public function store(ProviderRequest $request)
+    {
+        $provider = Provider::create($request->validated());
+
+        if ($request->hasFile('logo')) {
+            $provider->addMedia($request->file('logo'))
+                    ->toMediaCollection('logo');
+        }
+
+        Alert::success(__('settings.success'), __('createsms'));
+        return redirect()->route('ad.providers.index');
+    }
+
+    public function edit(Provider $provider)
+    {
+        return view('admin.providers.edit', compact('provider'));
+    }
+
+    public function update(ProviderRequest $request, Provider $provider)
+    {
+        $provider->update($request->validated());
+
+        if ($request->hasFile('logo')) {
+            $provider->clearMediaCollection('logo');
+            $provider->addMedia($request->file('logo'))
+                    ->toMediaCollection('logo');
+        }
+
+        Alert::success(__('settings.success'), __('editsms'));
+        return redirect()->route('ad.providers.index');
+    }
+
+    public function destroy(Provider $provider)
+    {
+        $provider->delete();
+        Alert::success(__('settings.success'), __('deletesms'));
+        return redirect()->back();
+    }
+}

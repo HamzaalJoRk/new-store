@@ -26,7 +26,7 @@ return [
             'countries' => 'c,r,u,d',
             'cities' => 'c,r,u,d',
             'agents' => 'c,r,u,d',
-
+            'providers' => 'c,r,u,d',
         ],
         'user' => [
 

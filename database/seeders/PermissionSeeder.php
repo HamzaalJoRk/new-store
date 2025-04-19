@@ -20,5 +20,6 @@ class PermissionSeeder extends Seeder
         Permission::create(['guard_name'=>'admin','name' => 'delete']);
         Permission::create(['guard_name'=>'admin','name'=> 'update']);
         Permission::create(['guard_name'=>'admin' ,'name'=> 'view']);
+
     }
 }

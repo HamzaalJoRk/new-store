@@ -90,6 +90,13 @@
                     </a>
                 </li>
                 @endif
+                @if (auth()->user()->hasPermission('read_providers'))
+                <li>
+                    <a href="{{route('ad.providers.index')}}" >
+                        <i class="fa fa-user"></i>
+                        <span key="t-dashboards">{{ __('providers.providers') }}</span> 
+                </li>
+                @endif
                 @if (auth()->user()->hasPermission('read_countries'))
                 <li>
                     <a href="{{route('ad.countries.index')}}" >
@@ -106,6 +113,7 @@
                     </a>
                 </li>
                 @endif
+                
             </ul>
         </div>
         <!-- Sidebar -->
