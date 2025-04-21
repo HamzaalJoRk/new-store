@@ -42,7 +42,7 @@ class CurdGamesController extends Controller
             }
 
             $response = Http::withHeaders([
-                'api-token' => $provider->api_token,
+                'api-token' => $provider->api_key,
             ])->get($apiUrl);
 
             if ($response->successful()) {
