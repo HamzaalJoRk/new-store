@@ -85,10 +85,10 @@ class ProviderController extends Controller
                     $apiUrl = 'https://api.elexellans.com.tr/client/api/products';
                     break;
                 case 'YamanPay':
-                    $apiUrl = 'https://api.yaman-pay.com/client/api/content/0';
+                    $apiUrl = 'https://api.yaman-pay.com/client/api/products';
                     break;
                 case 'saud':
-                    $apiUrl = 'https://api.saud-card.com/client/api/content/0';
+                    $apiUrl = 'https://api.saud-card.com/client/api/products';
                     break;
                 default:
                     return response()->json(['error' => 'Provider API not configured'], 400);
