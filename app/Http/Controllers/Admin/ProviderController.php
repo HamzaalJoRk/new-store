@@ -101,7 +101,7 @@ class ProviderController extends Controller
             if ($response->successful()) {
                 return response()->json($response->json());
             } else {
-                return response()->json(['error' => 'Failed to fetch products'], 500);
+                return response()->json(['error' => $response], 500);
             }
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
