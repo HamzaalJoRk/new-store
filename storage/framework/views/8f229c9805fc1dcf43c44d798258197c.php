@@ -211,6 +211,29 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label"><?php echo app('translator')->get('levels.level'); ?></label>
+                                    <select name="level_id" class="form-control" required>
+                                        <option value="" disabled><?php echo app('translator')->get('site.choose'); ?></option>
+                                        <?php $__currentLoopData = $levels; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $level): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($level->id); ?>" <?php echo e(old('level_id', $user->level_id) == $level->id ? 'selected' : ''); ?>>
+                                                <?php echo e($level->title); ?> (<?php echo app('translator')->get('levels.profit'); ?> <?php echo e($level->profit_percentage); ?>%)
+                                            </option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </select>
+                                    <?php $__errorArgs = ['level_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="text-danger"><?php echo e($message); ?></span>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">

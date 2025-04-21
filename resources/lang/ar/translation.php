@@ -20,6 +20,7 @@ return [
     'create transactions'=>'اضافة رصيد(دفعة)',
     'agents'=>'الوكلاء',
     'Add a purchase order'=>' إضافة طلب شراء',
+    'add'=>' إضافة طلب شراء',
     'recharge the balance'=>' شحن رصيد',
     'All'=>'الكل',
     'Pending'=>'قيد الانتظار',
@@ -99,7 +100,7 @@ return [
     'packages'=>'حزم',
     'is_show'=>'حالة العرض',
     'is_active'=>'الحالة',
-    'min_qty'=>'الكمية مقابل السعر',
+    'min_qty'=>'الحد الأدنى للكمية',
     'quantity'=>'الكمية',
     'price_qty'=>'السعر ',
     'need_id_player'=>'يحتاج الي رقم اللاعب',
@@ -120,5 +121,19 @@ return [
     'background_package'=>'صورة العملات الخلفية',
     'create'=>'اضافة',
     'qty'=>'الكمية',
+    'base_total' => 'السعر الأساسي',
+    'profit_percentage' => 'نسبة الربح',
+    'profit' => 'مبلغ الربح',
+    'final_total' => 'المجموع النهائي',
+
+    // إعدادات المزود
+    'Provider_Settings' => 'إعدادات المزود',
+    'Provider_Type' => 'نوع المزود',
+    'Provider' => 'المزود',
+    'Provider_Game' => 'لعبة المزود',
+    'Manual' => 'يدوي',
+    'Auto' => 'آلي',
+    'Choose_Provider' => 'اختر المزود',
+    'Choose_Game' => 'اختر اللعبة',
 ];
 ?>

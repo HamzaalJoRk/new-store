@@ -40,7 +40,10 @@
                                     <th>@lang('translation.status')</th>
                                     <th>@lang('translation.name')</th>
                                     <th>@lang('translation.qyt')</th>
-                                    <th>@lang('translation.amount')</th>
+                                    <th>@lang('translation.base_total')</th>
+                                    <th>@lang('translation.profit_percentage')</th>
+                                    <th>@lang('translation.profit')</th>
+                                    <th>@lang('translation.final_total')</th>
                                     <th>@lang('translation.note')</th>
                                     <th>@lang('translation.date_at')</th>
                                     <th>@lang('translation.action')</th>
@@ -72,6 +75,9 @@
                                         </td>
                                         <td>{{$game?->title}}</td>
                                         <td> @if($order->package){{$order->qty}}  × {{$order->package->quantity}} {{$game->name_currency}} @else {{$order->qty}} {{$game->name_currency}} @endif</td>
+                                        <td>{{$order->base_total}}</td>
+                                        <td>{{$order->profit_percentage}}%</td>
+                                        <td>{{$order->profit}}</td>
                                         <td>{{$order->final_total}}</td>
                                         <td>{{$order->details}}</td>
                                         <th scope="row">
@@ -95,7 +101,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th colspan="12">
+                                        <th colspan="14">
                                             <div class="float-right">
                                                 {!! $orders->appends(request()->all())->links() !!}
                                             </div>

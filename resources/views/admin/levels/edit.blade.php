@@ -64,6 +64,17 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>@lang('translation.profit_percentage')<span class="text-danger">*</span></label>
+                                    <input type="number" name="profit_percentage" class="form-control" 
+                                        value="{{ old('profit_percentage', $level->profit_percentage) }}"
+                                        placeholder="@lang('translation.profit_percentage')" step="0.01" min="0" max="100">
+                                    @error('profit_percentage')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">

@@ -23,7 +23,7 @@ class GameRequest extends FormRequest
     public function rules(): array
     {
         $game_i=null;
-      $game_t=  DB::table('game_translations')
+        $game_t=  DB::table('game_translations')
             ->where('locale','ar')
             ->where('game_id',$this->id)
             ->select('id')
@@ -38,7 +38,7 @@ class GameRequest extends FormRequest
             'need_name_player' => 'nullable',
             'need_id_player' => 'nullable',
             'price_qty' => 'required',
-            // 'min_qty' => 'required',
+            'min_qty' => 'required|integer|min:1',
             'price_qty_package'=>'',
             'quantity_package'=>'',
             'is_active_package'=>'',
@@ -46,8 +46,6 @@ class GameRequest extends FormRequest
             'ar.title' => 'required|unique:game_translations,title,'.$game_i,
             'ar.keywords' => 'required',
             'ar.name_currency' => 'required',
-
-
         ];
     }
 }

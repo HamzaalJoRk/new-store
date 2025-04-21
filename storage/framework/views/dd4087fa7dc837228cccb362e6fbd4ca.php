@@ -33,10 +33,12 @@
                             <table class="table table-bordered align-middle nowrap">
                                 <thead>
                                     <tr>
-                                        <th scope="col"><?php echo app('translator')->get('ID'); ?></th>
+                                        <th scope="col">#</th>
                                         <th scope="col"><?php echo app('translator')->get('levels.image'); ?></th>
-                                        <th scope="col"><?php echo app('translator')->get('levels.level'); ?></th>
-                                        <th scope="col"><?php echo app('translator')->get('Created_at'); ?></th>
+                                        <th scope="col"><?php echo app('translator')->get('levels.title'); ?></th>
+                                        <th scope="col"><?php echo app('translator')->get('levels.amount'); ?></th>
+                                        <th scope="col"><?php echo app('translator')->get('translation.profit_percentage'); ?></th>
+                                        <th scope="col"><?php echo app('translator')->get('levels.sort'); ?></th>
                                         <th scope="col"><?php echo app('translator')->get('action'); ?></th>
                                     </tr>
                                 </thead>
@@ -46,14 +48,15 @@
                                             <th scope="row"><?php echo e($index+1); ?></th>
                                             <th scope="row">
                                                 <?php if($level->image): ?>
-                                                <img src="<?php echo e(display_file($level->image)); ?>" style="width: 50px; height: 50px;"
-                                                alt="" >
+                                                    <img src="<?php echo e(display_file($level->image)); ?>" style="width: 50px;" alt="<?php echo e($level->title); ?>">
                                                 <?php else: ?>
-                                                <img src="<?php echo e(asset('no-image.jpg')); ?>" style="width: 50px;" alt="">
+                                                    <img src="<?php echo e(asset('no-image.jpg')); ?>" style="width: 50px;" alt="<?php echo e($level->title); ?>">
                                                 <?php endif; ?>
                                             </th>
-                                            <th scope="row"><?php echo e($level['title']); ?></th>
-                                            <th scope="row"> <?php echo e($level->created_at->format('Y-m-d')); ?></th>
+                                            <th scope="row"><?php echo e($level->title); ?></th>
+                                            <th scope="row"><?php echo e($level->amount); ?></th>
+                                            <th scope="row"><?php echo e($level->profit_percentage); ?>%</th>
+                                            <th scope="row"><?php echo e($level->sort); ?></th>
                                             <td>
                                                 <?php echo $__env->make('admin.levels.action', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                             </td>

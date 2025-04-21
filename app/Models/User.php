@@ -70,4 +70,15 @@ class User extends Authenticatable
         $symbol = Currency::whereId($settingCurrencyid)->value('symbol');
         return $symbol;
     }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+
+    public function getProfitPercentageAttribute()
+    {
+        return $this->level ? $this->level->profit_percentage : 0;
+    }
+
 }

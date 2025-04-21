@@ -7,6 +7,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Currency;
+use App\Models\Level;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Crypt;
@@ -23,41 +24,40 @@ class UserController extends Controller
         $this->middleware('permission:delete_users')->only(['delete']);
 
     }// end of __construct
+
     public function index()
     {
-        $users = User::with('country','city','currency')->latest()->paginate(10);
+        $users = User::with('country','city','currency','level')->latest()->paginate(10);
         return view('admin.users.index',compact('users'));
     }// end of index
+
     public function create(){
         $currencys = Currency::get();
         $countries = Country::get();
         $cities = City::get();
-        return view('admin.users.create',compact('countries','cities','currencys'));
+        $levels = Level::orderBy('sort')->get();
+        return view('admin.users.create',compact('countries','cities','currencys','levels'));
     }// end of create
+
     public function store(UserRequest $request)
     {
-        // dd($request->all());
-        // try{
-            $input['name'] = $request->name;
-            $input['user_name'] = $request->name;
-            $input['email'] = $request->email;
-            $input['whats_app'] = $request->whats_app;
-            $input['is_active'] = $request->is_active;
-            $input['currency_id'] = $request->currency_id;
-            $input['country_id'] = $request->country_id;
-            $input['city_id'] = $request->city_id;
-            $input['email_verified_at'] = now();
-            $input['password'] = bcrypt($request->password);
-            if (request('avatar')) {
-                $input['avatar'] = store_file(request('avatar'), 'users');
-            }
-            $user=User::create($input);
-            Alert::success(__('settings.success'), __('createsms'));
-            return redirect()->route('ad.users.index');
-        // }
-        // catch(\Exception $e){
-        //     return redirect()->back()->with('error',$e->getMessage());
-        // }
+        $input['name'] = $request->name;
+        $input['user_name'] = $request->name;
+        $input['email'] = $request->email;
+        $input['whats_app'] = $request->whats_app;
+        $input['is_active'] = $request->is_active;
+        $input['currency_id'] = $request->currency_id;
+        $input['country_id'] = $request->country_id;
+        $input['city_id'] = $request->city_id;
+        $input['level_id'] = $request->level_id;
+        $input['email_verified_at'] = now();
+        $input['password'] = bcrypt($request->password);
+        if (request('avatar')) {
+            $input['avatar'] = store_file(request('avatar'), 'users');
+        }
+        $user=User::create($input);
+        Alert::success(__('settings.success'), __('createsms'));
+        return redirect()->route('ad.users.index');
     }
 
     public function edit(User $user)
@@ -65,9 +65,9 @@ class UserController extends Controller
         $currencys = Currency::get();
         $countries = Country::get();
         $cities = City::get();
-        return view('admin.users.edit',compact('user','countries','cities','currencys'));
+        $levels = Level::orderBy('sort')->get();
+        return view('admin.users.edit',compact('user','countries','cities','currencys','levels'));
     }
-
 
     public function update(UserRequest $request, User $user)
     {
@@ -79,6 +79,7 @@ class UserController extends Controller
         $input['currency_id'] = $request->currency_id;
         $input['country_id'] = $request->country_id;
         $input['city_id'] = $request->city_id;
+        $input['level_id'] = $request->level_id;
         if(trim($request->password) != ''){
             $input['password'] = bcrypt($request->password);
         }

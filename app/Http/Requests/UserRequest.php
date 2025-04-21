@@ -34,6 +34,7 @@ class UserRequest extends FormRequest
                     'currency_id'   => 'nullable',
                     'country_id'    => 'nullable',
                     'city_id'       => 'nullable',
+                    'level_id'      => 'required|exists:levels,id',
                 ];
             }
             case 'PUT':
@@ -49,6 +50,7 @@ class UserRequest extends FormRequest
                     'currency_id'   => 'nullable',
                     'country_id'    => 'nullable',
                     'city_id'       => 'nullable',
+                    'level_id'      => 'required|exists:levels,id',
                 ];
             }
             default: break;

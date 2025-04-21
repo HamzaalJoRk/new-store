@@ -152,6 +152,22 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">@lang('levels.level')</label>
+                                    <select name="level_id" class="form-control" required>
+                                        <option value="" disabled>@lang('site.choose')</option>
+                                        @foreach($levels as $level)
+                                            <option value="{{ $level->id }}" {{ old('level_id', $user->level_id) == $level->id ? 'selected' : '' }}>
+                                                {{ $level->title }} (@lang('levels.profit') {{ $level->profit_percentage }}%)
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('level_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">

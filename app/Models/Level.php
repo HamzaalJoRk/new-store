@@ -12,7 +12,15 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Level extends Model implements TranslatableContract, HasMedia
 {
     use HasFactory, Translatable, InteractsWithMedia;
-    protected $guarded=[];
+    protected $guarded = [];
     public $translatedAttributes = ['title'];
 
+    protected $casts = [
+        'profit_percentage' => 'decimal:2'
+    ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

@@ -52,6 +52,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale().'/ad', 'as'=>'ad.', '
         return view('admin.index');
     })->name('index');
 
+    // Update controller from ProviderController to CurdGamesController
+    Route::get('games/fetch-products', [CurdGamesController::class, 'fetchProducts'])->name('games.fetch-products');
     Route::resource('games',CurdGamesController::class);
     Route::get('games/packages/{id}',[CurdGamesController::class,'packages'])->name('games.packages');
     Route::post('games/packages/update/{id}',[CurdGamesController::class,'packagesUpdate'])->name('games.packages.update');

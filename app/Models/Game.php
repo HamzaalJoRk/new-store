@@ -14,11 +14,26 @@ class Game extends Model implements TranslatableContract, HasMedia
     use HasFactory, Translatable, InteractsWithMedia;
     public $translatedAttributes = ['title','name_currency','keywords'];
 
-    protected $guarded=[];
-    protected $appends=['active_string','name_player_string','id_player_string','have_packages_string','is_show_string'];
+    protected $guarded = [];
+    protected $casts = [
+        'provider_params' => 'array'
+    ];
+    protected $appends = [
+        'active_string',
+        'name_player_string',
+        'id_player_string',
+        'have_packages_string',
+        'is_show_string'
+    ];
+
     public function scopeIsShow($query)
     {
         return $query->where('is_show',  1);
+    }
+
+    public function provider()
+    {
+        return $this->belongsTo(Provider::class);
     }
 
     public  function getIconAttribute()

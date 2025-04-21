@@ -18,7 +18,5 @@ return [
     'user'=>'user',
     'bank'=>'bank',
     'currencys'=>'currencies',
-
-
 ];
 

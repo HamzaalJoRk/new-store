@@ -40,6 +40,8 @@
                                         <th scope="col"><?php echo app('translator')->get('users.phone'); ?></th>
                                         <th scope="col"><?php echo app('translator')->get('users.countrycity'); ?></th>
                                         <th scope="col"><?php echo app('translator')->get('users.currency'); ?></th>
+                                        <th scope="col"><?php echo app('translator')->get('levels.level'); ?></th>
+                                        <th scope="col"><?php echo app('translator')->get('levels.profit'); ?></th>
                                         <th scope="col"><?php echo app('translator')->get('users.user_balance'); ?></th>
                                         <th scope="col"><?php echo app('translator')->get('users.status'); ?></th>
                                         <th scope="col"><?php echo app('translator')->get('Created_at'); ?></th>
@@ -67,6 +69,8 @@
                                             </th>
                                             <th scope="row"><?php echo e($user->country?->title); ?>/<?php echo e($user->city?->title); ?></th>
                                             <th scope="row"><?php echo e($user->currency?->currency); ?></th>
+                                            <th scope="row"><?php echo e(optional($user->level)->title); ?></th>
+                                            <th scope="row"><?php echo e(optional($user->level)->profit_percentage); ?>%</th>
                                             <th scope="row"> <?php echo e($user->user_balance); ?> $
                                                 <br> 
                                                 <?php echo e($user->getExchangeRate()); ?> <?php echo e($user->getExchangeSymbol()); ?>

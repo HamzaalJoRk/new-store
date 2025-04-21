@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProviderRequest;
 use App\Models\Provider;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ProviderController extends Controller
 {
@@ -65,5 +67,44 @@ class ProviderController extends Controller
         $provider->delete();
         Alert::success(__('settings.success'), __('deletesms'));
         return redirect()->back();
+    }
+
+    public function fetchProducts(Request $request)
+    {
+        $provider = Provider::find($request->provider);
+        if (!$provider) {
+            return response()->json(['error' => 'Provider not found'], 404);
+        }
+
+        try {
+            $apiUrl = '';
+            $token = $provider->api_token;
+            
+            switch ($provider->name) {
+                case 'Elexellans':
+                    $apiUrl = 'https://api.elexellans.com.tr/client/api/products';
+                    break;
+                case 'YamanPay':
+                    $apiUrl = 'https://api.yaman-pay.com/client/api/content/0';
+                    break;
+                case 'saud':
+                    $apiUrl = 'https://api.saud-card.com/client/api/content/0';
+                    break;
+                default:
+                    return response()->json(['error' => 'Provider API not configured'], 400);
+            }
+
+            $response = Http::withHeaders([
+                'api-token' => $provider->api_token,
+            ])->get($apiUrl);
+
+            if ($response->successful()) {
+                return response()->json($response->json());
+            } else {
+                return response()->json(['error' => 'Failed to fetch products'], 500);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

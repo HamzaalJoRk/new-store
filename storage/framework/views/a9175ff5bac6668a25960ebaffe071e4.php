@@ -3,54 +3,61 @@
         <div class="card">
 
             <div class="card-body">
-                <h4 class="card-title"> @lang('translation.Add') @lang('translation.Games')</h4>
-                <form class="needs-validation" novalidate method="post" action="{{route('ad.games.store')}}" enctype="multipart/form-data">
-                    @csrf
+                <h4 class="card-title"> <?php echo app('translator')->get('translation.Add'); ?> <?php echo app('translator')->get('translation.Games'); ?></h4>
+                <form class="needs-validation" novalidate method="post" action="<?php echo e(route('ad.games.store')); ?>" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
                     <div class="row">
-                            @foreach (config('translatable.locales') as $locale)
+                            <?php $__currentLoopData = config('translatable.locales'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $locale): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <div class="form-group">
-                                            <label for="">@lang('levels.' . $locale . '.leveltitle')<span class="text-danger">*</span></label>
-                                            <input type="text" name="{{ $locale }}[title]" class="form-control"
-                                                   value="{{ old($locale . '.title') }}">
-                                            @error($locale . '.title')
-                                            <div class="text-danger text-bold">{{ $message }}</div>
-                                            @enderror
+                                            <label for=""><?php echo app('translator')->get('levels.' . $locale . '.leveltitle'); ?><span class="text-danger">*</span></label>
+                                            <input type="text" name="<?php echo e($locale); ?>[title]" class="form-control"
+                                                   value="<?php echo e(old($locale . '.title')); ?>">
+                                            <?php $__errorArgs = [$locale . '.title'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                            <div class="text-danger text-bold"><?php echo e($message); ?></div>
+                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                         </div>
                                     </div>
                                 </div>
-                           @endforeach
-                            @foreach (config('translatable.locales') as $locale)
+                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php $__currentLoopData = config('translatable.locales'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $locale): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="col-md-3">
                                 <div class="mb-3">
-                                    <label for="validationCustom01" class="form-label">@lang('translation.keywords') ({{$locale}})</label>
-                                    <input type="text" class="form-control" id="validationCustom01" placeholder="@lang('translation.keywords')"
-                                           required name="{{ $locale }}[keywords]">
+                                    <label for="validationCustom01" class="form-label"><?php echo app('translator')->get('translation.keywords'); ?> (<?php echo e($locale); ?>)</label>
+                                    <input type="text" class="form-control" id="validationCustom01" placeholder="<?php echo app('translator')->get('translation.keywords'); ?>"
+                                           required name="<?php echo e($locale); ?>[keywords]">
                                     <div class="valid-feedback">
-                                        @lang('translation.validKeywords')
+                                        <?php echo app('translator')->get('translation.validKeywords'); ?>
                                     </div>
                                     <div class="invalid-feedback">
-                                        @lang('translation.invalidKeywords')
+                                        <?php echo app('translator')->get('translation.invalidKeywords'); ?>
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
-                            @foreach (config('translatable.locales') as $locale)
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php $__currentLoopData = config('translatable.locales'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $locale): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="col-md-3">
                                 <div class="mb-3">
-                                    <label for="validationCustom01" class="form-label">@lang('translation.name_currency') ({{$locale}})</label>
-                                    <input type="text" class="form-control" id="validationCustom01" placeholder="@lang('translation.name_currency')"
-                                           required name="{{ $locale }}[name_currency]">
+                                    <label for="validationCustom01" class="form-label"><?php echo app('translator')->get('translation.name_currency'); ?> (<?php echo e($locale); ?>)</label>
+                                    <input type="text" class="form-control" id="validationCustom01" placeholder="<?php echo app('translator')->get('translation.name_currency'); ?>"
+                                           required name="<?php echo e($locale); ?>[name_currency]">
                                     <div class="valid-feedback">
-                                        @lang('translation.validName_currency')
+                                        <?php echo app('translator')->get('translation.validName_currency'); ?>
                                     </div>
                                     <div class="invalid-feedback">
-                                        @lang('translation.validName_currency')
+                                        <?php echo app('translator')->get('translation.validName_currency'); ?>
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
 
@@ -58,27 +65,27 @@
 
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label for="validationCustom02" class="form-label">  @lang('translation.price_qty')</label>
-                                <input type="number" class="form-control" id="validationCustom02" placeholder="@lang('translation.price_qty')"
+                                <label for="validationCustom02" class="form-label">  <?php echo app('translator')->get('translation.price_qty'); ?></label>
+                                <input type="number" class="form-control" id="validationCustom02" placeholder="<?php echo app('translator')->get('translation.price_qty'); ?>"
                                        required name="price_qty" step="any">
                                 <div class="valid-feedback">
-                                    @lang('translation.validPrice_qty')
+                                    <?php echo app('translator')->get('translation.validPrice_qty'); ?>
                                 </div>
                                 <div class="invalid-feedback">
-                                    @lang('translation.invalidPrice_qty').
+                                    <?php echo app('translator')->get('translation.invalidPrice_qty'); ?>.
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label for="validationCustom02" class="form-label">  @lang('translation.min_qty')</label>
-                                <input type="number" class="form-control" id="validationCustom02" placeholder="@lang('translation.min_qty')"
+                                <label for="validationCustom02" class="form-label">  <?php echo app('translator')->get('translation.min_qty'); ?></label>
+                                <input type="number" class="form-control" id="validationCustom02" placeholder="<?php echo app('translator')->get('translation.min_qty'); ?>"
                                        required name="min_qty">
                                 <div class="valid-feedback">
-                                    @lang('translation.validMin_qty')
+                                    <?php echo app('translator')->get('translation.validMin_qty'); ?>
                                 </div>
                                 <div class="invalid-feedback">
-                                    @lang('translation.invalidMin_qty').
+                                    <?php echo app('translator')->get('translation.invalidMin_qty'); ?>.
                                 </div>
                             </div>
                         </div>
@@ -90,40 +97,40 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label for="validationCustom02" class="form-label">  @lang('translation.icon') <span class="text-danger">(1:1)</span></label>
+                                <label for="validationCustom02" class="form-label">  <?php echo app('translator')->get('translation.icon'); ?> <span class="text-danger">(1:1)</span></label>
                                 <input type="file" class="form-control" id="validationCustom02"
                                        required name="icon">
                                 <div class="valid-feedback">
-                                    @lang('translation.validIcon')
+                                    <?php echo app('translator')->get('translation.validIcon'); ?>
                                 </div>
                                 <div class="invalid-feedback">
-                                    @lang('translation.invalidIcon').
+                                    <?php echo app('translator')->get('translation.invalidIcon'); ?>.
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label for="validationCustom02" class="form-label">  @lang('translation.Background')<span class="text-danger">(163px * 115px )</span></label>
+                                <label for="validationCustom02" class="form-label">  <?php echo app('translator')->get('translation.Background'); ?><span class="text-danger">(163px * 115px )</span></label>
                                 <input type="file" class="form-control" id="validationCustom02"
                                        required name="background">
                                 <div class="valid-feedback">
-                                    @lang('translation.validBackground')
+                                    <?php echo app('translator')->get('translation.validBackground'); ?>
                                 </div>
                                 <div class="invalid-feedback">
-                                    @lang('translation.invalidBackground')
+                                    <?php echo app('translator')->get('translation.invalidBackground'); ?>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label for="validationCustom02" class="form-label">  @lang('translation.icon_coins')<span class="text-danger">(1:1 )</span></label>
+                                <label for="validationCustom02" class="form-label">  <?php echo app('translator')->get('translation.icon_coins'); ?><span class="text-danger">(1:1 )</span></label>
                                 <input type="file" class="form-control" id="validationCustom02" placeholder="icon coins"
                                        required name="icon_coins">
                                 <div class="valid-feedback">
-                                    @lang('translation.validIcon_coins')
+                                    <?php echo app('translator')->get('translation.validIcon_coins'); ?>
                                 </div>
                                 <div class="invalid-feedback">
-                                    @lang('translation.invalidIcon_coins')
+                                    <?php echo app('translator')->get('translation.invalidIcon_coins'); ?>
                                 </div>
                             </div>
                         </div>
@@ -133,17 +140,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="validationCustom03" class="form-label">@lang('translation.Status')</label>
+                                <label for="validationCustom03" class="form-label"><?php echo app('translator')->get('translation.Status'); ?></label>
                                 <select class="form-select" id="validationCustom03" required name="is_active">
-                                    <option selected disabled value=""> @lang('translation.Choose')</option>
-                                    <option value="1" >@lang('translation.active')</option>
-                                    <option value="0" >@lang('translation.unactive')</option>
+                                    <option selected disabled value=""> <?php echo app('translator')->get('translation.Choose'); ?></option>
+                                    <option value="1" ><?php echo app('translator')->get('translation.active'); ?></option>
+                                    <option value="0" ><?php echo app('translator')->get('translation.unactive'); ?></option>
                                 </select>
                                 <div class="valid-feedback">
-                                    @lang('translation.validStatus')
+                                    <?php echo app('translator')->get('translation.validStatus'); ?>
                                 </div>
                                 <div class="invalid-feedback">
-                                    @lang('translation.invalidStatus')
+                                    <?php echo app('translator')->get('translation.invalidStatus'); ?>
 
                                 </div>
 
@@ -152,17 +159,17 @@
 
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="validationCustom03" class="form-label">@lang('translation.is_show')</label>
+                                <label for="validationCustom03" class="form-label"><?php echo app('translator')->get('translation.is_show'); ?></label>
                                 <select class="form-select" id="validationCustom03" required name="is_show">
-                                    <option selected disabled value=""> @lang('translation.Choose')</option>
-                                    <option value="1" >@lang('translation.show')</option>
-                                    <option value="0" >@lang('translation.hide')</option>
+                                    <option selected disabled value=""> <?php echo app('translator')->get('translation.Choose'); ?></option>
+                                    <option value="1" ><?php echo app('translator')->get('translation.show'); ?></option>
+                                    <option value="0" ><?php echo app('translator')->get('translation.hide'); ?></option>
                                 </select>
                                 <div class="valid-feedback">
-                                    @lang('translation.validIs_show')
+                                    <?php echo app('translator')->get('translation.validIs_show'); ?>
                                 </div>
                                 <div class="invalid-feedback">
-                                    @lang('translation.invalidIs_show')
+                                    <?php echo app('translator')->get('translation.invalidIs_show'); ?>
 
                                 </div>
 
@@ -177,7 +184,7 @@
                                     <input class="form-check-input" type="checkbox"  id="need_id_player" name="need_id_player" value="1" >
 
                                     <label class="form-check-label" for="need_id_player">
-                                        @lang('translation.need_id_player')
+                                        <?php echo app('translator')->get('translation.need_id_player'); ?>
                                     </label>
 
                                 </div>
@@ -193,7 +200,7 @@
                                     <input class="form-check-input" type="checkbox"  id="need_name_player" name="need_name_player" value="1" >
 
                                     <label class="form-check-label" for="need_name_player">
-                                        @lang('translation.need_name_player')
+                                        <?php echo app('translator')->get('translation.need_name_player'); ?>
                                     </label>
                                 </div>
 
@@ -209,7 +216,7 @@
                                     <input class="form-check-input" type="checkbox"  id="background_package" name="have_packages" value="1" >
 
                                     <label class="form-check-label" for="background_package">
-                                        @lang('translation.have_packages')
+                                        <?php echo app('translator')->get('translation.have_packages'); ?>
                                     </label>
 
                                 </div>
@@ -226,14 +233,14 @@
                         <div class="row card-header">
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label for="validationCustom02" class="form-label">  @lang('translation.background_package')<span class="text-danger">(1:1)</span> </label>
+                                    <label for="validationCustom02" class="form-label">  <?php echo app('translator')->get('translation.background_package'); ?><span class="text-danger">(1:1)</span> </label>
                                     <input type="file" class="form-control" id="validationCustom02" placeholder="background package"
                                             name="background_package" >
                                     <div class="valid-feedback">
-                                        @lang('translation.validBackground_package')
+                                        <?php echo app('translator')->get('translation.validBackground_package'); ?>
                                     </div>
                                     <div class="invalid-feedback">
-                                        @lang('translation.validBackground_package')
+                                        <?php echo app('translator')->get('translation.validBackground_package'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -260,49 +267,49 @@
 
 
                     <div>
-                        <button class="btn btn-primary" type="submit">@lang('translation.create')</button>
+                        <button class="btn btn-primary" type="submit"><?php echo app('translator')->get('translation.create'); ?></button>
                     </div>
                 </form>
                 <div class=" d-none"  id="PackageForm-black">
                     <div class="item row d-none"    >
                         <div class="col-md-2">
                             <div class="mb-3">
-                                <label for="validationCustom02" class="form-label">  @lang('translation.price_qty')</label>
+                                <label for="validationCustom02" class="form-label">  <?php echo app('translator')->get('translation.price_qty'); ?></label>
                                 <input type="number" class="form-control" id="validationCustom02"
                                        required name="price_qty_package[]" step="any">
                                 <div class="valid-feedback">
-                                    @lang('translation.validPrice_qty')
+                                    <?php echo app('translator')->get('translation.validPrice_qty'); ?>
                                 </div>
 
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="mb-3">
-                                <label for="validationCustom02" class="form-label">  @lang('translation.quantity')</label>
+                                <label for="validationCustom02" class="form-label">  <?php echo app('translator')->get('translation.quantity'); ?></label>
                                 <input type="number" class="form-control" id="validationCustom02"
                                        required name="quantity_package[]">
                                 <div class="valid-feedback">
-                                    @lang('translation.validQuantity')
+                                    <?php echo app('translator')->get('translation.validQuantity'); ?>
                                 </div>
                                 <div class="invalid-feedback">
-                                    @lang('translation.invalidQuantity').
+                                    <?php echo app('translator')->get('translation.invalidQuantity'); ?>.
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-2">
 
                             <div class="mb-3">
-                                <label for="validationCustom03" class="form-label">@lang('translation.Status')</label>
+                                <label for="validationCustom03" class="form-label"><?php echo app('translator')->get('translation.Status'); ?></label>
                                 <select class="form-select" id="validationCustom03" required name="is_active_package[]">
-                                    <option selected disabled value=""> @lang('translation.Choose')</option>
-                                    <option value="1" >@lang('translation.active')</option>
-                                    <option value="0" >@lang('translation.unactive')</option>
+                                    <option selected disabled value=""> <?php echo app('translator')->get('translation.Choose'); ?></option>
+                                    <option value="1" ><?php echo app('translator')->get('translation.active'); ?></option>
+                                    <option value="0" ><?php echo app('translator')->get('translation.unactive'); ?></option>
                                 </select>
                                 <div class="valid-feedback">
-                                    @lang('translation.validStatus')
+                                    <?php echo app('translator')->get('translation.validStatus'); ?>
                                 </div>
                                 <div class="invalid-feedback">
-                                    @lang('translation.invalidStatus')
+                                    <?php echo app('translator')->get('translation.invalidStatus'); ?>
 
                                 </div>
 
@@ -325,10 +332,10 @@
     </div> <!-- end col -->
 
 </div>
-@section('script')
-    <script src="{{ URL::asset('build/libs/parsleyjs/parsley.min.js') }}"></script>
+<?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(URL::asset('build/libs/parsleyjs/parsley.min.js')); ?>"></script>
 
-    <script src="{{ URL::asset('/build/js/pages/form-validation.init.js') }}"></script>
+    <script src="<?php echo e(URL::asset('/build/js/pages/form-validation.init.js')); ?>"></script>
     <script>
 
         $(document).ready(function () {
@@ -382,5 +389,6 @@
             })
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
 
+<?php /**PATH F:\hamza\new-store\resources\views/admin/games/add.blade.php ENDPATH**/ ?>

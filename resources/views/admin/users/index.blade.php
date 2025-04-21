@@ -40,6 +40,8 @@
                                         <th scope="col">@lang('users.phone')</th>
                                         <th scope="col">@lang('users.countrycity')</th>
                                         <th scope="col">@lang('users.currency')</th>
+                                        <th scope="col">@lang('levels.level')</th>
+                                        <th scope="col">@lang('levels.profit')</th>
                                         <th scope="col">@lang('users.user_balance')</th>
                                         <th scope="col">@lang('users.status')</th>
                                         <th scope="col">@lang('Created_at')</th>
@@ -67,6 +69,8 @@
                                             </th>
                                             <th scope="row">{{ $user->country?->title}}/{{ $user->city?->title}}</th>
                                             <th scope="row">{{ $user->currency?->currency}}</th>
+                                            <th scope="row">{{ optional($user->level)->title }}</th>
+                                            <th scope="row">{{ optional($user->level)->profit_percentage }}%</th>
                                             <th scope="row"> {{ $user->user_balance}} $
                                                 <br> 
                                                 {{ $user->getExchangeRate() }} {{ $user->getExchangeSymbol() }}

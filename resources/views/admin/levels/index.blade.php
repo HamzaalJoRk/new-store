@@ -33,10 +33,12 @@
                             <table class="table table-bordered align-middle nowrap">
                                 <thead>
                                     <tr>
-                                        <th scope="col">@lang('ID')</th>
+                                        <th scope="col">#</th>
                                         <th scope="col">@lang('levels.image')</th>
-                                        <th scope="col">@lang('levels.level')</th>
-                                        <th scope="col">@lang('Created_at')</th>
+                                        <th scope="col">@lang('levels.title')</th>
+                                        <th scope="col">@lang('levels.amount')</th>
+                                        <th scope="col">@lang('translation.profit_percentage')</th>
+                                        <th scope="col">@lang('levels.sort')</th>
                                         <th scope="col">@lang('action')</th>
                                     </tr>
                                 </thead>
@@ -46,14 +48,15 @@
                                             <th scope="row">{{ $index+1 }}</th>
                                             <th scope="row">
                                                 @if($level->image)
-                                                <img src="{{display_file($level->image)}}" style="width: 50px; height: 50px;"
-                                                alt="" >
+                                                    <img src="{{display_file($level->image)}}" style="width: 50px;" alt="{{ $level->title }}">
                                                 @else
-                                                <img src="{{ asset('no-image.jpg') }}" style="width: 50px;" alt="">
+                                                    <img src="{{ asset('no-image.jpg') }}" style="width: 50px;" alt="{{ $level->title }}">
                                                 @endif
                                             </th>
-                                            <th scope="row">{{ $level['title'] }}</th>
-                                            <th scope="row"> {{ $level->created_at->format('Y-m-d') }}</th>
+                                            <th scope="row">{{ $level->title }}</th>
+                                            <th scope="row">{{ $level->amount }}</th>
+                                            <th scope="row">{{ $level->profit_percentage }}%</th>
+                                            <th scope="row">{{ $level->sort }}</th>
                                             <td>
                                                 @include('admin.levels.action')
                                             </td>

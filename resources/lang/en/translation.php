@@ -297,4 +297,18 @@ return [
     'unactive'=>'unactive',
     'qty'=>'quantity',
     'background_package'=>'background currency image',
-    ];
+    'base_total' => 'Base Total',
+    'profit_percentage' => 'Profit %',
+    'profit' => 'Profit Amount',
+    'final_total' => 'Final Total',
+
+    // Provider Settings
+    'Provider_Settings' => 'Provider Settings',
+    'Provider_Type' => 'Provider Type',
+    'Provider' => 'Provider',
+    'Provider_Game' => 'Provider Game',
+    'Manual' => 'Manual',
+    'Auto' => 'Automatic',
+    'Choose_Provider' => 'Choose Provider',
+    'Choose_Game' => 'Choose Game',
+];
