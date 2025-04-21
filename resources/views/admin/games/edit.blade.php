@@ -56,7 +56,7 @@
                                         <div class="form-group">
                                             <label for="">@lang('levels.' . $locale . '.leveltitle')<span class="text-danger">*</span></label>
                                             <input type="text" name="{{ $locale }}[title]" class="form-control"
-                                                   value="{{ old($game->title) }}">
+                                                   value="{{$game->title}}">
                                             @error($locale . '.title')
                                             <div class="text-danger text-bold">{{ $message }}</div>
                                             @enderror
@@ -70,7 +70,7 @@
                                         <label for="validationCustom01" class="form-label">@lang('translation.keywords') ({{$locale}})</label>
                                         <input type="text" class="form-control" id="validationCustom01" placeholder="@lang('translation.keywords')"
                                                required name="{{ $locale }}[keywords]"
-                                        value="{{ $game->keywords }}">
+                                        value="{{ $game->slug }}">
                                         <div class="valid-feedback">
                                             @lang('translation.validKeywords')
                                         </div>
