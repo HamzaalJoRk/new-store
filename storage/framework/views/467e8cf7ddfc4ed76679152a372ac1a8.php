@@ -56,7 +56,7 @@
                                         <div class="form-group">
                                             <label for=""><?php echo app('translator')->get('levels.' . $locale . '.leveltitle'); ?><span class="text-danger">*</span></label>
                                             <input type="text" name="<?php echo e($locale); ?>[title]" class="form-control"
-                                                   value="<?php echo e(old($locale . '.title',$game->translate($locale)->title)); ?>">
+                                                   value="<?php echo e(old($game->title)); ?>">
                                             <?php $__errorArgs = [$locale . '.title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -77,7 +77,7 @@ unset($__errorArgs, $__bag); ?>
                                         <label for="validationCustom01" class="form-label"><?php echo app('translator')->get('translation.keywords'); ?> (<?php echo e($locale); ?>)</label>
                                         <input type="text" class="form-control" id="validationCustom01" placeholder="<?php echo app('translator')->get('translation.keywords'); ?>"
                                                required name="<?php echo e($locale); ?>[keywords]"
-                                        value="<?php echo e(old($locale.'.keywords',$game->translate($locale)->keywords)); ?>">
+                                        value="<?php echo e($game->keywords); ?>">
                                         <div class="valid-feedback">
                                             <?php echo app('translator')->get('translation.validKeywords'); ?>
                                         </div>
@@ -92,7 +92,7 @@ unset($__errorArgs, $__bag); ?>
                                     <div class="mb-3">
                                         <label for="validationCustom01" class="form-label"><?php echo app('translator')->get('translation.name_currency'); ?> (<?php echo e($locale); ?>)</label>
                                         <input type="text" class="form-control" id="validationCustom01" placeholder="<?php echo app('translator')->get('translation.name_currency'); ?>"
-                                               required name="<?php echo e($locale); ?>[name_currency]" value="<?php echo e(old($locale.'.name_currency',$game->translate($locale)->keywords)); ?>">
+                                               required name="<?php echo e($locale); ?>[name_currency]" value="<?php echo e($game->name_currency); ?>">
                                         <div class="valid-feedback">
                                             <?php echo app('translator')->get('translation.validName_currency'); ?>
                                         </div>
@@ -111,7 +111,7 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="mb-3">
                                     <label for="validationCustom02" class="form-label">  <?php echo app('translator')->get('translation.price_qty'); ?></label>
                                     <input type="number" class="form-control" id="validationCustom02" placeholder="<?php echo app('translator')->get('translation.price_qty'); ?>"
-                                           required name="price_qty" step="any" value="<?php echo e(old('price_qty',$game->price_qty)); ?>">
+                                           required name="price_qty" step="any" value="<?php echo e($game->price_qty); ?>">
                                     <div class="valid-feedback">
                                         <?php echo app('translator')->get('translation.validPrice_qty'); ?>
                                     </div>
@@ -124,7 +124,7 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="mb-3">
                                     <label for="validationCustom02" class="form-label">  <?php echo app('translator')->get('translation.min_qty'); ?></label>
                                     <input type="number" class="form-control" id="validationCustom02" placeholder="<?php echo app('translator')->get('translation.min_qty'); ?>"
-                                           required name="min_qty" value="<?php echo e(old('min_qty',$game->min_qty)); ?>">
+                                           required name="min_qty" value="<?php echo e($game->min_qty); ?>">
                                     <div class="valid-feedback">
                                         <?php echo app('translator')->get('translation.validMin_qty'); ?>
                                     </div>

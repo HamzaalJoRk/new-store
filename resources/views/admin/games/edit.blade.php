@@ -56,7 +56,7 @@
                                         <div class="form-group">
                                             <label for="">@lang('levels.' . $locale . '.leveltitle')<span class="text-danger">*</span></label>
                                             <input type="text" name="{{ $locale }}[title]" class="form-control"
-                                                   value="{{ old($locale . '.title',$game->translate($locale)->title) }}">
+                                                   value="{{ old($game->title) }}">
                                             @error($locale . '.title')
                                             <div class="text-danger text-bold">{{ $message }}</div>
                                             @enderror
@@ -70,7 +70,7 @@
                                         <label for="validationCustom01" class="form-label">@lang('translation.keywords') ({{$locale}})</label>
                                         <input type="text" class="form-control" id="validationCustom01" placeholder="@lang('translation.keywords')"
                                                required name="{{ $locale }}[keywords]"
-                                        value="{{old($locale.'.keywords',$game->translate($locale)->keywords)}}">
+                                        value="{{ $game->keywords }}">
                                         <div class="valid-feedback">
                                             @lang('translation.validKeywords')
                                         </div>
@@ -85,7 +85,7 @@
                                     <div class="mb-3">
                                         <label for="validationCustom01" class="form-label">@lang('translation.name_currency') ({{$locale}})</label>
                                         <input type="text" class="form-control" id="validationCustom01" placeholder="@lang('translation.name_currency')"
-                                               required name="{{ $locale }}[name_currency]" value="{{old($locale.'.name_currency',$game->translate($locale)->keywords)}}">
+                                               required name="{{ $locale }}[name_currency]" value="{{ $game->name_currency }}">
                                         <div class="valid-feedback">
                                             @lang('translation.validName_currency')
                                         </div>
@@ -104,7 +104,7 @@
                                 <div class="mb-3">
                                     <label for="validationCustom02" class="form-label">  @lang('translation.price_qty')</label>
                                     <input type="number" class="form-control" id="validationCustom02" placeholder="@lang('translation.price_qty')"
-                                           required name="price_qty" step="any" value="{{old('price_qty',$game->price_qty)}}">
+                                           required name="price_qty" step="any" value="{{ $game->price_qty }}">
                                     <div class="valid-feedback">
                                         @lang('translation.validPrice_qty')
                                     </div>
@@ -117,7 +117,7 @@
                                 <div class="mb-3">
                                     <label for="validationCustom02" class="form-label">  @lang('translation.min_qty')</label>
                                     <input type="number" class="form-control" id="validationCustom02" placeholder="@lang('translation.min_qty')"
-                                           required name="min_qty" value="{{old('min_qty',$game->min_qty)}}">
+                                           required name="min_qty" value="{{ $game->min_qty }}">
                                     <div class="valid-feedback">
                                         @lang('translation.validMin_qty')
                                     </div>
