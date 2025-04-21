@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
         // User::truncate();
         $admin = Admin::create([
             'name' => 'admin',
-            'email' => 'admin@sherifshalaby.tech',
+            'email' => 'admin@zain-market.com',
             'password' => bcrypt('123456'),
             'phone' => '0123456789',
             'image'=> 'no-image.jpg',
