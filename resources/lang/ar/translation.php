@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'footer_copyright' => 'تمت البرمجة بكل فخر في شريف شلبي التقنية',
+    'footer_copyright' => 'تمت البرمجة بكل فخر في كاي بايت التقنية',
     'unavailable'=>'غير متوفر',
     'Technical Support'=>'دعم فني',
     'index'=>'الرئيسية',
